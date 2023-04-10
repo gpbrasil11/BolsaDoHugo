@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Layout noturno</title>
+	<style>
+		body {
+			background-color: #1d1f21;
+			color: #c5c8c6;
+			font-family: sans-serif;
+			font-size: 16px;
+			line-height: 1.5;
+			margin: 0;
+			padding: 0;
+		}
+
+		.container {
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 20px;
+		}
+
+		.card {
+			background-color: #282a2e;
+			border-radius: 4px;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+			margin-bottom: 20px;
+			padding: 20px;
+		}
+
+		.card-title {
+			color: #81a2be;
+			font-size: 24px;
+			margin: 0 0 10px;
+			padding: 0;
+		}
+
+		.card-content {
+			color: #c5c8c6;
+			font-size: 16px;
+			margin: 0;
+			padding: 0;
+		}
+
+		.btn {
+			background-color: #81a2be;
+			border: none;
+			border-radius: 4px;
+			color: #1d1f21;
+			cursor: pointer;
+			font-size: 16px;
+			margin-top: 20px;
+			padding: 10px 20px;
+		}
+
+		.btn:hover {
+			background-color: #5c85ad;
+			color: #fff;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="card">
+			<h2 class="card-title">Dados de ações</h2>
+			{% if data is not none %}
+			<table>
+				<thead>
+					<tr>
+						<th>Open</th>
+						<th>High</th>
+						<th>Low</th>
+						<th>Close</th>
+						<th>Volume</th>
+						<th>body</th>
+						<th>upper_wick</th>
+						<th>lower_wick</th>
+						<th>candle_type</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for row in data.iterrows() %}
+					<tr>
+						<td>{{ row[1]['Open'] }}</td>
+						<td>{{ row[1]['High'] }}</td>
+						<td>{{ row[1]['Low'] }}</td>
+						<td>{{ row[1]['Close'] }}</td>
+						<td>{{ row[1]['Volume'] }}</td>
+						<td>{{ row[1]['body'] }}</td>
+						<td>{{ row[1]['upper_wick'] }}</td>
+						<td>{{ row[1]['lower_wick'] }}</td>
+						<td>{{ row[1]['candle_type'] }}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			{% else %}
+			<p class="card-content">Não há dados para exibir.</p>
+			{% endif %}
+			<button class="btn">Atualizar</button>
+		</div>
+	</div>
+</body>
+</html>
+
+<script>
+    setInterval(function(){
+        location.reload();
+    }, 60000); // Atualiza a página a cada 60 segundos (1 minuto)
+</script>
