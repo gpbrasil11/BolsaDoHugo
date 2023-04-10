@@ -2,16 +2,11 @@ import yfinance as yf
 import telegram
 from flask import Flask, render_template
 
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-
-chat_id = os.getenv('CHAT_ID_BOLSA')
-token = os.getenv('TOKEN_BOT_TELEGRAM')
-
 app = Flask(
     __name__, template_folder='E:/OneDrive/Desktop/visual bot bolsa/templates')
+
+token = '6207875880:AAFsioEMXMnus2r5Id6yxs6cE4YKCzSdw4Q'
+chat_id = '-804551456'
 
 
 def send_message(token, chat_id, text):
