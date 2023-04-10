@@ -1,12 +1,17 @@
+from dotenv import load_dotenv
+import os
 import yfinance as yf
-import telegram
+import telebot as telegram
 from flask import Flask, render_template
 
 app = Flask(
-    __name__, template_folder='E:/OneDrive/Desktop/visual bot bolsa/templates')
+    __name__, template_folder='BolsaDoHugo/templates')
 
-token = '6207875880:AAFsioEMXMnus2r5Id6yxs6cE4YKCzSdw4Q'
-chat_id = '-804551456'
+
+load_dotenv()
+
+chat_id = os.getenv('CHAT_ID_BOLSA')
+token = os.getenv('TOKEN_BOT_TELEGRAM')
 
 
 def send_message(token, chat_id, text):
@@ -112,7 +117,7 @@ def index():
     data = data[-5:]
     # Renderiza o template HTML com os dados
     # verifica se todas as linhas são iguais a "Marubozu de alta +"
-    if all(data['candle_type'] == 'Marubozu de alta +'):
+    if all(df['candle_type'] == 'Marubozu de alta +'):
         print('Alerta! Todas as linhas são iguais a "Marubozu de alta +"')
         send_message(
             token, chat_id, 'Alerta! Todas as linhas são iguais a "Marubozu de alta +"')
